@@ -1672,25 +1672,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   </div>
 </footer>
 
-<script>
-function submitForm(){
-  const name=document.getElementById('name').value.trim();
-  const phone=document.getElementById('phone').value.trim();
-  const comune=document.getElementById('comune').value.trim();
-  const privacy=document.getElementById('privacy').checked;
-  if(!name||!phone||!comune){alert('Compila i campi obbligatori: nome, telefono e dove si trova l\'immobile.');return;}
-  if(!privacy){alert('È necessario accettare il trattamento dei dati personali.');return;}
-  document.getElementById('contact-form').style.display='none';
-  document.getElementById('form-success').style.display='block';
-}
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    e.preventDefault();
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
-  });
-});
-</script>
+
 
 </div>
 
@@ -1707,7 +1689,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 </form>
 
 <script>
-// Smooth scroll per tutti i link ancora
+// ═══════════════════════════════════════════════════════════════
+// Smooth scroll per i link ancora
+// ═══════════════════════════════════════════════════════════════
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
@@ -1715,6 +1699,72 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+// ═══════════════════════════════════════════════════════════════
+// Gestione invio form con Netlify (senza redirect a pagina bianca)
+// ═══════════════════════════════════════════════════════════════
+function encodeFormData(data) {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+}
+
+function handleFormSubmit(formId, successId, event) {
+  event.preventDefault();
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  // Raccolgo i dati del form
+  const formData = new FormData(form);
+  const data = {};
+  formData.forEach((value, key) => { data[key] = value; });
+
+  // Disabilito il bottone per evitare doppi invii
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Invio in corso...';
+  }
+
+  // Invio i dati a Netlify via AJAX
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: encodeFormData(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      // Mostro la schermata di successo personalizzata
+      form.style.display = 'none';
+      const successEl = document.getElementById(successId);
+      if (successEl) {
+        successEl.style.display = 'block';
+        successEl.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+    } else {
+      throw new Error('Errore nell\'invio');
+    }
+  })
+  .catch(error => {
+    alert('Si è verificato un errore. Riprova o contattaci telefonicamente.');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Invia la richiesta →';
+    }
+    console.error('Errore form:', error);
+  });
+}
+
+// Collego i form mobile e desktop
+const desktopForm = document.getElementById('contact-form');
+if (desktopForm) {
+  desktopForm.addEventListener('submit', e => handleFormSubmit('contact-form', 'form-success', e));
+}
+
+const mobileForm = document.getElementById('m-contact-form');
+if (mobileForm) {
+  mobileForm.addEventListener('submit', e => handleFormSubmit('m-contact-form', 'm-form-success', e));
+}
 </script>
 </body>
 </html>
