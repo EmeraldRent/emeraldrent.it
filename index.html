@@ -931,6 +931,19 @@ footer{
 .m-hero>*:nth-child(5){animation-delay:.5s}
 .m-hero>*:nth-child(6){animation-delay:.58s}
 
+/* ── STIMA GRATUITA CTA — desktop ── */
+.stima-cta-section{background:var(--cream);padding:96px 64px;text-align:center;border-top:1px solid rgba(29,185,84,0.12);border-bottom:1px solid rgba(29,185,84,0.12)}
+.stima-cta-section .sec-title{margin:0 auto 16px;max-width:640px}
+.stima-cta-section .sec-sub{margin:0 auto}
+.stima-badges{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:28px 0 40px}
+.stima-badge{font-family:var(--ff-body);font-size:11px;font-weight:600;letter-spacing:1px;color:var(--em);background:rgba(29,185,84,0.08);border:1px solid var(--em-border);padding:6px 16px}
+.stima-btn{font-size:12px;letter-spacing:2px;padding:16px 44px}
+
+/* ── STIMA GRATUITA CTA — mobile ── */
+.m-stima-section{background:var(--cream);padding:48px 20px;text-align:center;border-top:1px solid rgba(29,185,84,0.12)}
+.m-stima-badges{display:flex;flex-direction:column;gap:10px;margin:24px 0 32px;align-items:center}
+.m-stima-badge{font-family:var(--ff-body);font-size:11px;font-weight:600;letter-spacing:1px;color:var(--em);background:rgba(29,185,84,0.08);border:1px solid var(--em-border);padding:6px 16px;display:inline-block}
+
 </style>
 </head>
 <body>
@@ -1210,6 +1223,20 @@ footer{
     <div class="m-gar-card"><strong>Blocco date senza penali</strong><p>Riservate l'immobile per uso personale via app.</p></div>
   </div>
   <a href="#m-form" class="m-btn-full">Contattaci — è senza impegno →</a>
+</section>
+
+<!-- STIMA GRATUITA -->
+<section class="m-stima-section">
+  <div class="m-sec-label" style="color:var(--em)">Strumento gratuito</div>
+  <h2 class="m-sec-title">Scopri quanto può rendere il tuo immobile.</h2>
+  <div class="m-em-rule"></div>
+  <p class="m-sec-body">Inserisci i dati del tuo immobile e ricevi via email una stima personalizzata dei ricavi potenziali — con PDF incluso. Gratis, senza impegno.</p>
+  <div class="m-stima-badges">
+    <span class="m-stima-badge">✓ Completamente gratuito</span>
+    <span class="m-stima-badge">✓ Nessun impegno</span>
+    <span class="m-stima-badge">✓ PDF via email incluso</span>
+  </div>
+  <a href="https://platform.emeraldrent.it/stima-gratuita" class="m-btn-full">Calcola il potenziale →</a>
 </section>
 
 <!-- FORM -->
@@ -1613,6 +1640,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     <div class="gar-card"><strong>Segnalazione danni entro 24 ore</strong><p>Qualsiasi danno comunicato con foto, stima dei costi e avvio autonomo della pratica assicurativa.</p></div>
     <div class="gar-card"><strong>Blocco date senza penali</strong><p>Il proprietario può riservare l'immobile per uso personale via app, in qualsiasi periodo, senza costi.</p></div>
   </div>
+</section>
+
+<!-- STIMA GRATUITA -->
+<section class="stima-cta-section">
+  <div class="sec-eyebrow">Strumento gratuito</div>
+  <h2 class="sec-title">Scopri quanto può rendere<br>il tuo immobile — in 2 minuti.</h2>
+  <div class="em-rule" style="margin:20px auto"></div>
+  <p class="sec-sub">Inserisci le caratteristiche del tuo immobile e ricevi via email una stima personalizzata dei ricavi potenziali, con tre scenari basati sui dati di mercato reali della tua zona. Gratuito, senza impegno.</p>
+  <div class="stima-badges">
+    <span class="stima-badge">✓ Completamente gratuito</span>
+    <span class="stima-badge">✓ Nessun impegno</span>
+    <span class="stima-badge">✓ PDF via email incluso</span>
+    <span class="stima-badge">✓ Risultato in pochi minuti</span>
+  </div>
+  <a href="https://platform.emeraldrent.it/stima-gratuita" class="btn-em stima-btn">Calcola il potenziale del tuo immobile →</a>
 </section>
 
 <!-- FORM -->
